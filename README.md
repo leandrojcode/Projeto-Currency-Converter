@@ -25,7 +25,7 @@ O conversor simula a conversão de moedas com valores dinâmicos e design otimiz
 
 ## 🖼️ Demonstração
 
-![Preview do Projeto](./assets/preview.png)  
+![Preview do Projeto](./assets/currency-converter.png)  
 > Exemplo da interface com o sistema de conversão e ícones dinâmicos das moedas.
 
 ---
@@ -64,10 +64,7 @@ Responsividade e estética com CSS puro
 
 🌐 Deploy
 
-🔗 Veja o projeto online
+🔗 [Veja o projeto online](https://leandrojcode.github.io/Projeto-Currency-Converter/)
 
-👨‍💻 Autor
-
-Leandro Jesus
-
-Desenvolvedor Fullstack
+Desenvolvido por **Leandro Jesus**  
+[🔗 LinkedIn](https://www.linkedin.com/in/leandrojcode)
