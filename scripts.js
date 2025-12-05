@@ -3,7 +3,7 @@ const currencySelect = document.querySelector(".currency-select")
 const converteDe = document.querySelector(".currency-from")
 const currencyFromImg = document.querySelector(".currency-from-img");
 
-function convertValues() {
+const convertValues = async () => {
     const inputCurrencyValueRaw = document.querySelector(".input-currency").value
     const inputCurrencyValue = parseFloat(inputCurrencyValueRaw.replace(/\./g, '').replace(',', '.')) || 0;
     const currencyValueToConvert = document.querySelector(".currency-value-to-convert") //valor de origem
@@ -11,16 +11,19 @@ function convertValues() {
 
     console.log("from:", converteDe.value, "to:", currencySelect.value, "input:", inputCurrencyValue)
 
+    const data = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,GBP-BRL,CHF-BRL,BTC-BRL").then(response => response.json())
+
     const realToday = 1
-    const dolarToday = 5.34
-    const euroToday = 6.23
-    const libraToday = 7.16
-    const francoToday = 6.67
-    const bitcoinToday = 660219.38
+    const dolarToday = data.USDBRL.bid
+    const euroToday = data.EURBRL.bid
+    const libraToday = data.GBPBRL.bid
+    const francoToday = data.CHFBRL.bid
+    const bitcoinToday = data.BTCBRL.bid
+
 
     let valorEmReais = 0
 
-     
+
     // converter o valor de origem para real
     if (converteDe.value == "real") {
         valorEmReais = inputCurrencyValue * realToday;
@@ -63,7 +66,7 @@ function convertValues() {
         }).format(valorEmReais / euroToday)
     }
 
-     if (currencySelect.value == "libra") {
+    if (currencySelect.value == "libra") {
         //se o select estiver selecionado o valor da libra, entre aqui
         currencyValueConverted.innerHTML = new Intl.NumberFormat("en-GB", {
             style: "currency",
@@ -87,7 +90,7 @@ function convertValues() {
         }).format(valorEmReais / bitcoinToday)
     }
 
-     if (currencySelect.value == "real") {
+    if (currencySelect.value == "real") {
         //se o select estiver selecionado o valor do bitcoin, entre aqui
         currencyValueConverted.innerHTML = new Intl.NumberFormat("pt-BR", {
             style: "currency",
@@ -98,46 +101,46 @@ function convertValues() {
 
     //define o formato na moeda de origem a ser selecionada
     if (converteDe.value == "real") {
-    currencyValueToConvert.innerHTML = new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-    }).format(inputCurrencyValue)
-}
+        currencyValueToConvert.innerHTML = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        }).format(inputCurrencyValue)
+    }
 
     if (converteDe.value == "dolar") {
-    currencyValueToConvert.innerHTML = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD"
-    }).format(inputCurrencyValue)
-}
+        currencyValueToConvert.innerHTML = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD"
+        }).format(inputCurrencyValue)
+    }
 
     if (converteDe.value == "euro") {
-    currencyValueToConvert.innerHTML = new Intl.NumberFormat("de-DE", {
-        style: "currency",
-        currency: "EUR"
-    }).format(inputCurrencyValue)
-}
+        currencyValueToConvert.innerHTML = new Intl.NumberFormat("de-DE", {
+            style: "currency",
+            currency: "EUR"
+        }).format(inputCurrencyValue)
+    }
 
     if (converteDe.value == "libra") {
-    currencyValueToConvert.innerHTML = new Intl.NumberFormat("en-GB", {
-        style: "currency",
-        currency: "GBP"
-    }).format(inputCurrencyValue)
-}
+        currencyValueToConvert.innerHTML = new Intl.NumberFormat("en-GB", {
+            style: "currency",
+            currency: "GBP"
+        }).format(inputCurrencyValue)
+    }
 
-     if (converteDe.value == "franco") {
-    currencyValueToConvert.innerHTML = new Intl.NumberFormat("de-CH", {
-        style: "currency",
-        currency: "CHF"
-    }).format(inputCurrencyValue)
-}
+    if (converteDe.value == "franco") {
+        currencyValueToConvert.innerHTML = new Intl.NumberFormat("de-CH", {
+            style: "currency",
+            currency: "CHF"
+        }).format(inputCurrencyValue)
+    }
 
     if (converteDe.value == "bitcoin") {
-    currencyValueToConvert.innerHTML = new Intl.NumberFormat("en", {
-        style: "currency",
-        currency: "BTC"
-    }).format(inputCurrencyValue)
-}
+        currencyValueToConvert.innerHTML = new Intl.NumberFormat("en", {
+            style: "currency",
+            currency: "BTC"
+        }).format(inputCurrencyValue)
+    }
 
 }
 
